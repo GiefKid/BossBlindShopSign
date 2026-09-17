@@ -1,0 +1,15 @@
+{
+	"id": "BossShopSign",
+	"name": "Boss Shop Sign",
+	"display_name": "Boss Shop Sign",
+	"author": [
+		"GiefKid"
+	],
+	"description": "Replaces the shop sign with a preview of the upcoming boss blind, and keeps it visible while choosing a blind.",
+	"prefix": "bss",
+	"main_file": "BossShopSign.lua",
+	"priority": 1,
+	"version": "1.2.0",
+	"dependencies": [],
+	"conflicts": []
+}

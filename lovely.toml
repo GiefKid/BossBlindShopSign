@@ -1,0 +1,82 @@
+[manifest]
+version = "1.0.0"
+priority = 1
+
+# Replace the shop sign creation block with our boss blind display
+[[patches]]
+[patches.pattern]
+target = "functions/UI_definitions.lua"
+pattern = '''
+    local shop_sign = AnimatedSprite(0,0, 4.4, 2.2, G.ANIMATION_ATLAS['shop_sign'])
+    shop_sign:define_draw_steps({
+      {shader = 'dissolve', shadow_height = 0.05},
+      {shader = 'dissolve'}
+    })
+    G.SHOP_SIGN = UIBox{
+      definition =
+        {n=G.UIT.ROOT, config = {colour = G.C.DYN_UI.MAIN, emboss = 0.05, align = 'cm', r = 0.1, padding = 0.1}, nodes={
+          {n=G.UIT.R, config={align = "cm", padding = 0.1, minw = 4.72, minh = 3.1, colour = G.C.DYN_UI.DARK, r = 0.1}, nodes={
+            {n=G.UIT.R, config={align = "cm"}, nodes={
+              {n=G.UIT.O, config={object = shop_sign}}
+            }},
+            {n=G.UIT.R, config={align = "cm"}, nodes={
+              {n=G.UIT.O, config={object = DynaText({string = {localize('ph_improve_run')}, colours = {lighten(G.C.GOLD, 0.3)},shadow = true, rotate = true, float = true, bump = true, scale = 0.5, spacing = 1, pop_in = 1.5, maxw = 4.3})}}
+            }},
+          }},
+        }},
+      config = {
+        align="cm",
+        offset = {x=0,y=-15},
+        major = G.HUD:get_UIE_by_ID('row_blind'),
+        bond = 'Weak'
+      }
+    }
+    G.E_MANAGER:add_event(Event({
+      trigger = 'immediate',
+      func = (function()
+          G.SHOP_SIGN.alignment.offset.y = 0
+          return true
+      end)
+    }))'''
+position = "at"
+payload = '''
+    G.SHOP_SIGN = UIBox{
+      definition = G.UIDEF.BossShopSign_display(),
+      config = {
+        align="cm",
+        offset = {x=0,y=-15},
+        major = G.HUD:get_UIE_by_ID('row_blind'),
+        bond = 'Weak'
+      }
+    }
+    -- The -0.2 here (vanilla resets this to 0) is the sign's actual resting
+    -- offset once the slide-in intro finishes; the -15 above is just where
+    -- the intro starts from.
+    G.E_MANAGER:add_event(Event({
+      trigger = 'immediate',
+      func = (function()
+          G.SHOP_SIGN.alignment.offset.y = -0.2
+          return true
+      end)
+    }))'''
+match_indent = true
+
+# Append our UI function to UI_definitions.lua so it's available when the shop opens
+[[patches]]
+[patches.copy]
+target = "functions/UI_definitions.lua"
+position = "append"
+sources = [
+    "ui.lua",
+]
+
+# Append chip_UI_set hook + deck-view played-card marker after button_callbacks.lua.
+# button_callbacks.lua loads after common_events.lua, so copy_card is already defined.
+[[patches]]
+[patches.copy]
+target = "functions/button_callbacks.lua"
+position = "append"
+sources = [
+    "chip_ui_hook.lua",
+    "played_marker.lua",
+]
