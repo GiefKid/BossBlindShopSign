@@ -2,29 +2,39 @@
 -- Copyright (C) 2026 Jonathan Bowers (GiefKid)
 -- Licensed under the GNU General Public License v3.0. See the LICENSE file.
 
--- Deck-view preview for The Pillar boss blind.
--- When the current ante's boss is The Pillar and we're out of battle, cards that
--- have been played this ante get the vanilla debuff "X" shader in the deck view —
--- a preview of exactly which cards The Pillar will debuff (blind.lua: The Pillar
--- debuffs any card with ability.played_this_ante). Appended to button_callbacks.lua,
--- which loads after common_events.lua so copy_card is already defined.
+-- Deck-view preview for boss blinds that debuff cards based on a static property
+-- (suit, face rank) or on cards played this ante. When the upcoming boss is one
+-- of these and we're out of battle, matching cards get the vanilla debuff "X"
+-- shader in the deck view, mirroring blind.lua's Blind:debuff_card. Appended to
+-- button_callbacks.lua, which loads after common_events.lua so copy_card is
+-- already defined.
 
 BossShopSign = BossShopSign or {}
 
--- True when the deck view should preview The Pillar's debuff.
-function BossShopSign.pillar_preview_active()
+-- Returns the upcoming boss's G.P_BLINDS entry, or nil if there isn't one to
+-- preview (no boss chosen yet, or we're in the middle of the blind fight,
+-- where the real debuff already shows).
+function BossShopSign.get_previewed_boss()
     if not (G.GAME and G.GAME.round_resets and G.GAME.round_resets.blind_choices) then
-        return false
+        return nil
     end
-    -- Boss this ante must be The Pillar.
-    if G.GAME.round_resets.blind_choices['Boss'] ~= 'bl_pillar' then
-        return false
-    end
-    -- Out of battle only: during the fight the real debuff already shows.
     if G.GAME.blind and G.GAME.blind.in_blind then
-        return false
+        return nil
     end
-    return true
+    local key = G.GAME.round_resets.blind_choices['Boss']
+    return key and G.P_BLINDS[key] or nil
+end
+
+-- True when `card` would be debuffed by boss blind `blind`, per blind.lua's
+-- Blind:debuff_card (suit / is_face / The Pillar's played_this_ante — the only
+-- conditions in the base game that don't require the fight to already be live).
+function BossShopSign.card_previewed_debuffed(card, blind)
+    if not (card and card.playing_card and blind) then return false end
+    local debuff = blind.debuff
+    if debuff and debuff.suit and card:is_suit(debuff.suit, true) then return true end
+    if debuff and debuff.is_face == 'face' and card:is_face(true) then return true end
+    if blind.key == 'bl_pillar' and card.ability and card.ability.played_this_ante then return true end
+    return false
 end
 
 -- Wrap copy_card: the deck view (G.VIEWING_DECK) builds display copies via copy_card.
@@ -45,10 +55,11 @@ function copy_card(...)
             return nil
         end
     end
-    if c and G.VIEWING_DECK
-        and other and other.ability and other.ability.played_this_ante
-        and BossShopSign.pillar_preview_active() then
-        c.debuff = true
+    if c and G.VIEWING_DECK and other then
+        local blind = BossShopSign.get_previewed_boss()
+        if blind and BossShopSign.card_previewed_debuffed(other, blind) then
+            c.debuff = true
+        end
     end
     return c
 end
