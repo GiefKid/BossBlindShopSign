@@ -1,6 +1,6 @@
 # Boss Shop Sign
 
-A [Balatro](https://www.playbalatro.com/) mod (via [Steamodded](https://github.com/Steamodded/smods) + [Lovely](https://github.com/ethangreen-dev/lovely-injector)) that replaces the shop sign with a live preview of the upcoming boss blind and other info that you'd normally have to leave the shop or open a new window to access. Although other more complicated versions of this type of mod that exist like Next Ante or UnBlind, I wanted to create one that lives in the shop, has a very simple display of the current boss blind, the required score, skip tags, and which blind the user is currently on, without having to leave the shop or open another window to obtain that info.
+A simple [Balatro](https://www.playbalatro.com/) mod (via [Steamodded](https://github.com/Steamodded/smods) + [Lovely](https://github.com/ethangreen-dev/lovely-injector)) that replaces the shop sign with a live preview of the upcoming boss blind and other info that you'd normally have to leave the shop or open a new window to access. Although other more complicated versions of this type of mod that exist like Next Ante or UnBlind, I wanted to create one that lives in the shop, has a very simple display of the current boss blind, the required score, skip tags, and which blind the user is currently on, without having to leave the shop or open another window to obtain that info.
 
 ## Features
 
