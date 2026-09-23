@@ -2,7 +2,7 @@
 
 A simple [Balatro](https://www.playbalatro.com/) mod (via [Steamodded](https://github.com/Steamodded/smods) + [Lovely](https://github.com/ethangreen-dev/lovely-injector)) that replaces the shop sign with a live preview of the upcoming boss blind.
 
-Other versions of this UI mod already exist, but I wanted to create a simple one that lives in the shop and has a very simple display.
+Other versions of this UI mod already exist, but I wanted to create a simple one that lives in the shop and does not require any mouse clicks.
 
 ## Features
 
