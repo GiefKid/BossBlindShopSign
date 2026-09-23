@@ -13,8 +13,9 @@ Other versions of this UI mod already exist, but I wanted to create a simple one
 
 ## Installation
 
-1. Install [Steamodded](https://github.com/Steamodded/smods) and [Lovely](https://github.com/ethangreen-dev/lovely-injector).
-2. Copy this folder into your Balatro `Mods` directory as `BossShopSign`.
+1. Install [Steamodded](https://github.com/Steamodded/smods) and [Lovely Injector](https://github.com/ethangreen-dev/lovely-injector?tab=readme-ov-file#manual-installation) (both required — this mod is a Steamodded mod that also uses Lovely patches).
+2. Download the [latest release](https://github.com/GiefKid/BossShopSign/releases/latest) and extract it into its own folder inside your Balatro `Mods` folder (`%appdata%\Balatro\Mods`), so you end up with `Mods\BossShopSign\BossShopSign.json` etc.
+3. Launch the game. The shop sign now previews the upcoming boss blind automatically — no setup or toggling needed.
 
 ## Files
 
