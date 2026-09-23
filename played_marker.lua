@@ -56,9 +56,15 @@ function copy_card(...)
         end
     end
     if c and G.VIEWING_DECK and other then
+        -- is_suit/is_face are vanilla, but other mods (new suits, custom card
+        -- types) sometimes patch them; don't let a preview check crash the
+        -- deck view over a card copy_card already successfully produced.
         local blind = BossShopSign.get_previewed_boss()
-        if blind and BossShopSign.card_previewed_debuffed(other, blind) then
-            c.debuff = true
+        if blind then
+            local ok_preview, debuffed = pcall(BossShopSign.card_previewed_debuffed, other, blind)
+            if ok_preview and debuffed then
+                c.debuff = true
+            end
         end
     end
     return c
