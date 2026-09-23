@@ -6,7 +6,7 @@ Other versions of this UI mod already exist, but I wanted to create a simple one
 
 ## Features
 
-- **Boss blind preview** on the shop sign: name, description, and sprite for the boss blind you're heading toward, colour-coded by which blind (Small/Big/Boss) is currently upcoming.
+- **Boss blind preview** on the shop sign: name, description, and sprite for the boss blind you're heading toward, color-coded by which blind (Small/Big/Boss) is currently upcoming.
 - **Skip-tag icons** flanking the boss sprite, showing any Small/Big blind tags you've skipped, dimmed once that blind has been passed.
 - **Required Chip Score shows in-shop**: the round-info panel shows the *next* blind's chip requirement (color-matched to blind type) instead of the last round's score, relabeled "Req. / Score".
 - **Improved Deck Preview**: When the upcoming boss debuffs cards, the deck view marks the affected cards with the "X" Debuff ahead of time — cards played this ante for The Pillar, matching-suit cards for The Club/Goad/Window/Head, and face cards for The Plant.
