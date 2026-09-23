@@ -41,7 +41,7 @@ pattern = '''
 position = "at"
 payload = '''
     G.SHOP_SIGN = UIBox{
-      definition = G.UIDEF.BossShopSign_display(),
+      definition = G.UIDEF.BossBlindShopSign_display(),
       config = {
         align="cm",
         offset = {x=0,y=-15},

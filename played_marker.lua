@@ -1,4 +1,4 @@
--- Boss Shop Sign
+-- Boss Blind Shop Sign
 -- Copyright (C) 2026 Jonathan Bowers (GiefKid)
 -- Licensed under the GNU General Public License v3.0. See the LICENSE file.
 
@@ -9,12 +9,12 @@
 -- button_callbacks.lua, which loads after common_events.lua so copy_card is
 -- already defined.
 
-BossShopSign = BossShopSign or {}
+BossBlindShopSign = BossBlindShopSign or {}
 
 -- Returns the upcoming boss's G.P_BLINDS entry, or nil if there isn't one to
 -- preview (no boss chosen yet, or we're in the middle of the blind fight,
 -- where the real debuff already shows).
-function BossShopSign.get_previewed_boss()
+function BossBlindShopSign.get_previewed_boss()
     if not (G.GAME and G.GAME.round_resets and G.GAME.round_resets.blind_choices) then
         return nil
     end
@@ -28,7 +28,7 @@ end
 -- True when `card` would be debuffed by boss blind `blind`, per blind.lua's
 -- Blind:debuff_card (suit / is_face / The Pillar's played_this_ante — the only
 -- conditions in the base game that don't require the fight to already be live).
-function BossShopSign.card_previewed_debuffed(card, blind)
+function BossBlindShopSign.card_previewed_debuffed(card, blind)
     if not (card and card.playing_card and blind) then return false end
     local debuff = blind.debuff
     if debuff and debuff.suit and card:is_suit(debuff.suit, true) then return true end
@@ -47,7 +47,7 @@ function copy_card(...)
         -- card.lua:set_ability crashes when other.config.center is nil (e.g. after certain
         -- SMODS/mod operations leave a card in an invalid state). Fall back to a bare c_base
         -- card so callers that immediately set properties (copy.greyed, etc.) don't cascade-crash.
-        sendWarnMessage('copy_card failed, using fallback: '..tostring(c), 'BossShopSign')
+        sendWarnMessage('copy_card failed, using fallback: '..tostring(c), 'BossBlindShopSign')
         if other and other.T then
             c = Card(other.T.x, other.T.y, G.CARD_W, G.CARD_H,
                 G.P_CARDS.empty, G.P_CENTERS.c_base)
@@ -59,9 +59,9 @@ function copy_card(...)
         -- is_suit/is_face are vanilla, but other mods (new suits, custom card
         -- types) sometimes patch them; don't let a preview check crash the
         -- deck view over a card copy_card already successfully produced.
-        local blind = BossShopSign.get_previewed_boss()
+        local blind = BossBlindShopSign.get_previewed_boss()
         if blind then
-            local ok_preview, debuffed = pcall(BossShopSign.card_previewed_debuffed, other, blind)
+            local ok_preview, debuffed = pcall(BossBlindShopSign.card_previewed_debuffed, other, blind)
             if ok_preview and debuffed then
                 c.debuff = true
             end

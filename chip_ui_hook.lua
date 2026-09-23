@@ -1,4 +1,4 @@
--- Boss Shop Sign
+-- Boss Blind Shop Sign
 -- Copyright (C) 2026 Jonathan Bowers (GiefKid)
 -- Licensed under the GNU General Public License v3.0. See the LICENSE file.
 
@@ -61,7 +61,7 @@ G.FUNCS.chip_UI_set = function(e)
     local top, bot = bss_find_label_nodes(e)
 
     if bss_in_shop_context() then
-        local next_chips = BossShopSign.get_next_blind_chips()
+        local next_chips = BossBlindShopSign.get_next_blind_chips()
         if next_chips and next_chips > 0 then
             local new_text = number_format(next_chips)
             if G.GAME.chips_text ~= new_text then

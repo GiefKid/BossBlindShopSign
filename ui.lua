@@ -1,15 +1,15 @@
--- Boss Shop Sign
+-- Boss Blind Shop Sign
 -- Copyright (C) 2026 Jonathan Bowers (GiefKid)
 -- Licensed under the GNU General Public License v3.0. See the LICENSE file.
 
-BossShopSign = BossShopSign or {}
+BossBlindShopSign = BossBlindShopSign or {}
 
 -- Build a hoverable skip-tag icon slot for the given blind choice ('Small'/'Big').
 -- ALWAYS returns a fixed-width slot (empty when there's no tag to show) so the
 -- boss icon between the two slots stays centred. Mirrors create_UIBox_blind_tag's
 -- collide/ref_table wrapping so hover popups work. `dimmed` marks a blind that's
 -- already been passed, and is drawn with a faded overlay.
-function BossShopSign.make_skip_tag_node(blind_choice, dimmed)
+function BossBlindShopSign.make_skip_tag_node(blind_choice, dimmed)
     -- Fixed-width slot; empty content keeps the boss icon centred.
     local function slot(content)
         return {n=G.UIT.C, config={align='bm', minw=1.0, padding=0.03}, nodes = content or {}}
@@ -70,8 +70,8 @@ function BossShopSign.make_skip_tag_node(blind_choice, dimmed)
     end
 
     -- Keep a reference so the tag object survives for the life of the UIBox.
-    BossShopSign.skip_tags = BossShopSign.skip_tags or {}
-    BossShopSign.skip_tags[blind_choice] = tag
+    BossBlindShopSign.skip_tags = BossBlindShopSign.skip_tags or {}
+    BossBlindShopSign.skip_tags[blind_choice] = tag
 
     -- minw kept small so the two flanking tags don't widen the sign past its
     -- fixed 4.72 body width.
@@ -83,7 +83,7 @@ function BossShopSign.make_skip_tag_node(blind_choice, dimmed)
     })
 end
 
-function G.UIDEF.BossShopSign_display()
+function G.UIDEF.BossBlindShopSign_display()
     local boss_key = G.GAME.round_resets.blind_choices['Boss']
     local blind = G.P_BLINDS[boss_key]
 
@@ -114,7 +114,7 @@ function G.UIDEF.BossShopSign_display()
 
     local blind_sprite = AnimatedSprite(0, 0, 1.5, 1.5,
         G.ANIMATION_ATLAS[blind.atlas] or G.ANIMATION_ATLAS['blind_chips'], blind.pos)
-    BossShopSign.blind_sprite = blind_sprite
+    BossBlindShopSign.blind_sprite = blind_sprite
     blind_sprite:define_draw_steps({{shader='dissolve', shadow_height=0.05}, {shader='dissolve'}})
     blind_sprite.float = true
     blind_sprite.states.hover.can = true
@@ -172,8 +172,8 @@ function G.UIDEF.BossShopSign_display()
     --   Boss upcoming        → small + big both dimmed
     local small_dim = (display_state ~= 'Small Blind')
     local big_dim   = (display_state == 'Upcoming')
-    local left_node  = BossShopSign.make_skip_tag_node('Small', small_dim)
-    local right_node = BossShopSign.make_skip_tag_node('Big', big_dim)
+    local left_node  = BossBlindShopSign.make_skip_tag_node('Small', small_dim)
+    local right_node = BossBlindShopSign.make_skip_tag_node('Big', big_dim)
 
     return {
         n = G.UIT.ROOT,
@@ -203,7 +203,7 @@ function G.UIDEF.BossShopSign_display()
 end
 
 -- Next blind chip requirement.
-function BossShopSign.get_next_blind_chips()
+function BossBlindShopSign.get_next_blind_chips()
     if not (G.GAME and G.GAME.round_resets) then return nil end
     local states  = G.GAME.round_resets.blind_states
     local choices = G.GAME.round_resets.blind_choices

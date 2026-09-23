@@ -1,4 +1,4 @@
-# Boss Shop Sign
+# Boss Blind Shop Sign
 
 A simple [Balatro](https://www.playbalatro.com/) mod (via [Steamodded](https://github.com/Steamodded/smods) + [Lovely](https://github.com/ethangreen-dev/lovely-injector)) that replaces the shop sign with a live preview of the upcoming boss blind.
 
@@ -14,15 +14,15 @@ Other versions of this UI mod already exist, but I wanted to create a simple one
 ## Installation
 
 1. Install [Steamodded](https://github.com/Steamodded/smods) and [Lovely Injector](https://github.com/ethangreen-dev/lovely-injector?tab=readme-ov-file#manual-installation) (both required — this mod is a Steamodded mod that also uses Lovely patches).
-2. Download the [latest release](https://github.com/GiefKid/BossShopSign/releases/latest) and extract it into its own folder inside your Balatro `Mods` folder (`%appdata%\Balatro\Mods`), so you end up with `Mods\BossShopSign\BossShopSign.json` etc.
+2. Download the [latest release](https://github.com/GiefKid/BossBlindShopSign/releases/latest) and extract it into its own folder inside your Balatro `Mods` folder (`%appdata%\Balatro\Mods`), so you end up with `Mods\BossBlindShopSign\BossBlindShopSign.json` etc.
 3. Launch the game. The shop sign now previews the upcoming boss blind automatically — no setup or toggling needed.
 
 ## Files
 
 | File | Purpose |
 |---|---|
-| `BossShopSign.json` | Steamodded mod manifest |
-| `BossShopSign.lua` | SMODS registration entry point |
+| `BossBlindShopSign.json` | Steamodded mod manifest |
+| `BossBlindShopSign.lua` | SMODS registration entry point |
 | `lovely.toml` | Lovely patches that wire the mod into the game's UI/event code |
 | `ui.lua` | Boss blind sign UI (patched into `functions/UI_definitions.lua`) |
 | `chip_ui_hook.lua` | Shop chip-requirement display hook |
