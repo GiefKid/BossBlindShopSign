@@ -4,6 +4,37 @@
 
 BossBlindShopSign = BossBlindShopSign or {}
 
+-- Make a sprite sitting in a UIT.O slot draggable like the in-round boss chip:
+-- it follows the cursor while held and glides back to its slot on release.
+-- Clicking does nothing else. Vanilla gets this for free because Blind:align
+-- skips the sprite while drag.is; our sprites are bonded Strong to their slot,
+-- which would snap T back every frame. So while held we let the drag own T and
+-- only ease VT toward it, then on release the bond goes Weak until the sprite
+-- has glided home, then Strong again.
+function BossBlindShopSign.make_draggable(sprite)
+    sprite.states.drag.can = true
+    sprite.states.click.can = false
+    sprite.move = function(self, dt)
+        if self.states.drag.is then
+            if self.FRAME.MOVE >= G.FRAMES.MOVE then return end
+            self.FRAME.MOVE = G.FRAMES.MOVE
+            self:move_juice(dt)
+            self:move_xy(dt)
+            self:move_r(dt, self.velocity)
+            self:move_scale(dt)
+            self:calculate_parrallax()
+            self.bbss_returning = true
+            self.role.xy_bond = 'Weak'
+            return
+        end
+        Moveable.move(self, dt)
+        if self.bbss_returning and self.VT.x == self.T.x and self.VT.y == self.T.y then
+            self.bbss_returning = nil
+            self.role.xy_bond = 'Strong'
+        end
+    end
+end
+
 -- Build a hoverable skip-tag icon slot for the given blind choice ('Small'/'Big').
 -- ALWAYS returns a fixed-width slot (empty when there's no tag to show) so the
 -- boss icon between the two slots stays centred. Mirrors create_UIBox_blind_tag's
@@ -43,6 +74,7 @@ function BossBlindShopSign.make_skip_tag_node(blind_choice, dimmed)
     local tag = Tag(key, nil, blind_choice)
     local tag_ui, tag_sprite = tag:generate_UI(0.7)
     tag_sprite.states.collide.can = true
+    BossBlindShopSign.make_draggable(tag_sprite)
 
     -- generate_UI marks the sprite force_focus=true, which makes the O node draw
     -- a persistent focus-highlight fill behind it (the "black square"). Turn focus
@@ -118,9 +150,10 @@ function G.UIDEF.BossBlindShopSign_display()
     blind_sprite:define_draw_steps({{shader='dissolve', shadow_height=0.05}, {shader='dissolve'}})
     blind_sprite.float = true
     blind_sprite.states.hover.can = true
-    blind_sprite.states.drag.can = false
     blind_sprite.states.collide.can = true
     blind_sprite.config = {blind = blind, force_focus = true}
+
+    BossBlindShopSign.make_draggable(blind_sprite)
     blind_sprite.hover = function()
         if not G.CONTROLLER.dragging.target or G.CONTROLLER.using_touch then
             if not blind_sprite.hovering and blind_sprite.states.visible then
