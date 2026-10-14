@@ -10,11 +10,11 @@ A simple [Balatro](https://www.playbalatro.com/) mod (via [Steamodded](https://g
 - **Improved Deck Preview**: When the upcoming boss debuffs cards, the Deck View marks the affected cards with the "X" Debuff. Cards played this ante for The Pillar, matching-suit cards for The Club/Goad/Window/Head, and face cards for The Plant fall under this rule. In v1.5, this is now a togglable setting, and support for Verdant Leaf was added.
 
 ## v1.5 Features
-- When player owns Chicot, "Boss Disabled" now appears instead of "Upcoming". Debuffs in shop also do not appear.
 - New Settings button
 - Setting 1: **Show Upcoming Debuffed Cards**: Already in the mod (Improved Deck Preview), just wasn't able to be toggled on/off and is now color-adjustable. Default On.
 - Setting 2: **Show Debuff Reminder On Deck**: New "X" color-adjustable debuff icon on the deck when in the shop, which appears when a boss blind debuffs at least one card. Default On.
 - Setting 3: **Spawn Shop Sign in Center**: Sign spawns in center, then flies to its home, instead of sliding in from top-left. Helps the player not forget to view it. **Default Off**.
+- When player owns Chicot, "Boss Disabled" now appears instead of "Upcoming". Debuffs in shop also do not appear.
 - Works alongside [UnBlind](https://github.com/MeraGenio/UnBlind), using its shop sign UI, but includes Req. Score, View Deck, and Debuff Reminder features.
 
 ## v1.5 Bug Fixes
