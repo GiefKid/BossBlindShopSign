@@ -15,7 +15,7 @@ A simple [Balatro](https://www.playbalatro.com/) mod (via [Steamodded](https://g
   - Setting 2: **Show Debuff Reminder On Deck**: New "X" color-adjustable debuff icon on the deck when in the shop, which appears when a boss blind debuffs at least one card. Default On.
   - Setting 3: **Spawn Shop Sign in Center**: Sign spawns in center, then flies to its home, instead of sliding in from top-left. Helps the player not forget to view it. **Default Off**.
 - When player owns Chicot, "Boss Disabled" now appears instead of "Upcoming". Debuffs in shop also do not appear.
-- Works alongside [UnBlind](https://github.com/MeraGenio/UnBlind), using its shop sign UI, but includes Req. Score, View Deck, and Debuff Reminder features.
+- Works alongside [UnBlind](https://github.com/MeraGenio/UnBlind), using its shop sign UI, but BBSS's Req. Score, View Deck, and Debuff Reminder features.
 
 ## v1.5 Bug Fixes
 - Orbital Tag now properly updates in-shop if Hieroglyph or Petroglyph is purchased
