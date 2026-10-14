@@ -10,28 +10,29 @@ Other versions of this UI mod already exist, but I wanted to create a simple one
 - **Skip-tag icons** flanking the boss sprite, showing any Small/Big blind tags you've skipped, dimmed once that blind has been passed.
 - **Draggable icons (v1.4)**: the boss sprite and skip-tag icons on the sign can be picked up and dragged around like the in-round boss chip, and glide back into place when released.
 - **Required Chip Score shows in-shop**: the round-info panel shows the *next* blind's chip requirement (color-matched to blind type) instead of the last round's score, relabeled "Req. / Score".
-- **Improved Deck Preview**: When the upcoming boss debuffs cards, the Deck View marks the affected cards with the "X" Debuff — cards played this ante for The Pillar, matching-suit cards for The Club/Goad/Window/Head, and face cards for The Plant. In v1.5, this is now a togglable setting, and support for Verdant Leaf was added.
+- **Improved Deck Preview**: When the upcoming boss debuffs cards, the Deck View marks the affected cards with the "X" Debuff -- cards played this ante for The Pillar, matching-suit cards for The Club/Goad/Window/Head, and face cards for The Plant. In v1.5, this is now a togglable setting, and support for Verdant Leaf was added.
 
 ## v1.5 Features
-- When player owns Chicot, "Boss Disabled" now appears instead of "Upcoming", as well as a grey border instead of red. Debuffs in shop also do not appear.
+- When player owns Chicot, "Boss Disabled" now appears instead of "Upcoming". Debuffs in shop also do not appear.
 - New Settings button
-- Setting 1: **Show Upcoming Debuffed Cards**: Already in the mod (Improved Deck Preview), just wasn't able to be toggled on/off. Default On.
+- Setting 1: **Show Upcoming Debuffed Cards**: Already in the mod (Improved Deck Preview), just wasn't able to be toggled on/off and is now color-adjustable. Default On.
 - Setting 2: **Show Debuff Reminder On Deck**: New "X" color-adjustable debuff icon on the deck when in the shop, which appears when a boss blind debuffs at least one card. Default On.
-- Setting 3: **Spawn Shop Sign in Center**: Sign spawns in center, then flys to its home, instead of sliding in from top-left. Helps the player not forget to view it. **Default Off**.
+- Setting 3: **Spawn Shop Sign in Center**: Sign spawns in center, then flies to its home, instead of sliding in from top-left. Helps the player not forget to view it. **Default Off**.
+- Works alongside [Unblind](https://github.com/MeraGenio/UnBlind/pull/21), using its shop sign UI, but includes Req. Score, View Deck, and Debuff Reminder features.
 
 ## v1.5 Bug Fixes
-- Orbital Tag now properly updates in-shop if Hieroglyph or Petroglyph is purchased.
-- The Ox now shows your actual most played hand.
+- Orbital Tag now properly updates in-shop if Hieroglyph or Petroglyph is purchased
+- The Ox now shows your actual most played hand
 - Req. Score now properly stays visible in all parts of the shop
-- Better (but not perfect) modded boss description support
+- Better (but not perfect) modded boss description support (rank debuffs now supported)
 - Verdant Leaf now shows properly in the Deck Preview, and triggers the X Debuff Reminder
 - New Steamodded (1.0.0~BETA-1221a or newer) requirement to prevent crashes
 
 ## Installation
 
-1. Install [Steamodded](https://github.com/Steamodded/smods) and [Lovely Injector](https://github.com/ethangreen-dev/lovely-injector?tab=readme-ov-file#manual-installation) (both required — this mod is a Steamodded mod that also uses Lovely patches).
+1. Install [Steamodded](https://github.com/Steamodded/smods) and [Lovely Injector](https://github.com/ethangreen-dev/lovely-injector?tab=readme-ov-file#manual-installation) (both required -- this mod is a Steamodded mod that also uses Lovely patches).
 2. Download the [latest release](https://github.com/GiefKid/BossBlindShopSign/releases/latest) and extract it into its own folder inside your Balatro `Mods` folder (`%appdata%\Balatro\Mods`), so you end up with `Mods\BossBlindShopSign\BossBlindShopSign.json` etc.
-3. Launch the game. The shop sign now previews the upcoming boss blind automatically — no setup or toggling needed.
+3. Launch the game. The shop sign now previews the upcoming boss blind automatically -- no setup or toggling needed.
 
 ## Files
 
@@ -46,4 +47,4 @@ Other versions of this UI mod already exist, but I wanted to create a simple one
 
 ## License
 
-GPL-3.0 — see [LICENSE](LICENSE).
+GPL-3.0 -- see [LICENSE](LICENSE).
