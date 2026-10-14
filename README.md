@@ -1,6 +1,6 @@
 # Boss Blind Shop Sign
 
-A simple [Balatro](https://www.playbalatro.com/) mod (via [Steamodded](https://github.com/Steamodded/smods) + [Lovely](https://github.com/ethangreen-dev/lovely-injector)) that replaces the shop sign with a live preview of the upcoming boss blind
+A simple [Balatro](https://www.playbalatro.com/) mod (via [Steamodded](https://github.com/Steamodded/smods) + [Lovely](https://github.com/ethangreen-dev/lovely-injector)) that replaces the shop sign with a live preview of the upcoming boss blind.
 
 ## Features
 - **Boss blind preview** on the shop sign: name, description, and sprite for the boss blind you're heading toward, color-coded by which blind (Small/Big/Boss) is currently upcoming.
@@ -15,7 +15,7 @@ A simple [Balatro](https://www.playbalatro.com/) mod (via [Steamodded](https://g
   - Setting 2: **Show Debuff Reminder On Deck**: New "X" color-adjustable debuff icon on the deck when in the shop, which appears when a boss blind debuffs at least one card. Default On.
   - Setting 3: **Spawn Shop Sign in Center**: Sign spawns in center, then flies to its home, instead of sliding in from top-left. Helps the player not forget to view it. **Default Off**.
 - When player owns Chicot, "Boss Disabled" now appears instead of "Upcoming". Debuffs in shop also do not appear.
-- Works alongside [UnBlind](https://github.com/MeraGenio/UnBlind), using its shop sign UI, but BBSS's Req. Score, View Deck, and Debuff Reminder features.
+- Works alongside [UnBlind](https://github.com/MeraGenio/UnBlind), using its shop sign UI, but keeps BBSS's Req. Score, View Deck, and Debuff Reminder features.
 
 ## v1.5 Bug Fixes
 - Orbital Tag now properly updates in-shop if Hieroglyph or Petroglyph is purchased
@@ -35,12 +35,16 @@ A simple [Balatro](https://www.playbalatro.com/) mod (via [Steamodded](https://g
 | File | Purpose |
 |---|---|
 | `BossBlindShopSign.json` | Steamodded mod manifest |
-| `BossBlindShopSign.lua` | SMODS registration entry point |
+| `BossBlindShopSign.lua` | SMODS entry point: options menu, colored X's, Chicot watcher |
 | `lovely.toml` | Lovely patches that wire the mod into the game's UI/event code |
 | `ui.lua` | Boss blind sign UI (patched into `functions/UI_definitions.lua`) |
 | `chip_ui_hook.lua` | Shop chip-requirement display hook |
 | `played_marker.lua` | Boss debuff deck-view preview |
+| `ante_refresh.lua` | Rebuilds the sign when the ante changes mid-shop |
+| `center_spawn.lua` | "Spawn Shop Sign in Center" effect |
+| `config.lua` | Default option values |
+| `assets/shaders/bbss_debuff.fs` | Copy of the vanilla debuff shader with a pickable X color |
 
 ## License
 
-GPL-3.0 -- see [LICENSE](LICENSE).
+GPL-3.0, see [LICENSE](LICENSE).

@@ -1,6 +1,8 @@
 [manifest]
 version = "1.0.0"
-priority = 1
+# high so other shop sign mods (UnBlind) patch first and their sign wins,
+# the rest of this mod still works with their sign
+priority = 10
 
 # Replace the shop sign creation block with our boss blind display
 [[patches]]
@@ -49,16 +51,18 @@ payload = '''
         bond = 'Weak'
       }
     }
-    -- The -0.2 here (vanilla resets this to 0) is the sign's actual resting
-    -- offset once the slide-in intro finishes; the -15 above is just where
-    -- the intro starts from.
+    G.SHOP_SIGN.bbss_sign = true
+    -- -0.2 is where the sign rests after sliding in (vanilla uses 0),
+    -- the -15 above is just where it starts
     G.E_MANAGER:add_event(Event({
       trigger = 'immediate',
       func = (function()
           G.SHOP_SIGN.alignment.offset.y = -0.2
           return true
       end)
-    }))'''
+    }))
+    -- Optional: fade the sign in at screen center instead (center_spawn.lua).
+    if BossBlindShopSign.start_center_spawn then BossBlindShopSign.start_center_spawn(G.SHOP_SIGN) end'''
 match_indent = true
 
 # Append our UI function to UI_definitions.lua so it's available when the shop opens
@@ -70,7 +74,7 @@ sources = [
     "ui.lua",
 ]
 
-# Append chip_UI_set hook + deck-view played-card marker after button_callbacks.lua.
+# Append chip_UI_set hook + deck-view played-card marker + ante-change sign refresh after button_callbacks.lua.
 # button_callbacks.lua loads after common_events.lua, so copy_card is already defined.
 [[patches]]
 [patches.copy]
@@ -79,4 +83,6 @@ position = "append"
 sources = [
     "chip_ui_hook.lua",
     "played_marker.lua",
+    "ante_refresh.lua",
+    "center_spawn.lua",
 ]

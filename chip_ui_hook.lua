@@ -5,20 +5,13 @@
 -- Hook chip_UI_set to display next blind chip requirement in shop (colored by type), vanilla otherwise.
 -- Also relabels "Round / score" → "Req. / Score" while in the shop or a booster pack.
 
--- True when we're in the shop or any booster pack opened from it.
-local function bss_in_shop_context()
-    local s = G.STATE
-    local S = G.STATES
-    return s == S.SHOP
-        or s == S.SMODS_BOOSTER_OPENED
-        or s == S.TAROT_PACK
-        or s == S.PLANET_PACK
-        or s == S.SPECTRAL_PACK
-        or s == S.STANDARD_PACK
-        or s == S.BUFFOON_PACK
+-- in the shop, including packs and planets used there. Also used by the deck X
+function BossBlindShopSign.in_shop_context()
+    return G.shop and not G.shop.REMOVED and G.STAGE == G.STAGES.RUN
 end
+local bss_in_shop_context = BossBlindShopSign.in_shop_context
 
--- Returns the appropriate text colour for the chip count: blue/gold/red by blind type.
+-- text color for the chip count: blue/gold/red by blind type
 local function bss_next_blind_colour()
     if not (G.GAME and G.GAME.round_resets and G.GAME.round_resets.blind_states) then
         return G.C.RED
@@ -33,7 +26,7 @@ local function bss_next_blind_colour()
     end
 end
 
--- Safely update a static T node's displayed text in-place.
+-- update a T node's text in place
 local function bss_set_label_text(node, new_text)
     if not (node and node.config and node.config.text ~= new_text) then return end
     node.config.text = new_text
@@ -53,6 +46,13 @@ local function bss_find_label_nodes(e)
     local row2 = label_c.children[2]
     local top = row1 and row1.children and row1.children[1]
     local bot = row2 and row2.children and row2.children[1]
+    -- only if they still read Round/score (or ours), in case a HUD mod moved things
+    local top_text = top and top.config and top.config.text
+    local bot_text = bot and bot.config and bot.config.text
+    if not ((top_text == 'Req.' or top_text == localize('k_round'))
+        and (bot_text == 'Score' or bot_text == localize('k_lower_score'))) then
+        return nil, nil
+    end
     return top, bot
 end
 

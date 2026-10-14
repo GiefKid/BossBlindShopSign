@@ -5,11 +5,13 @@
 	"author": [
 		"GiefKid"
 	],
-	"description": "Replaces the shop sign with a preview of the upcoming boss blind, and keeps it visible while choosing a blind.",
+	"description": "Replaces the shop sign with a preview of the upcoming boss blind, and shows the next blind's score requirement in the shop.",
 	"prefix": "bbss",
 	"main_file": "BossBlindShopSign.lua",
 	"priority": 1,
-	"version": "1.4.0",
-	"dependencies": [],
+	"version": "1.5.0",
+	"dependencies": [
+		"Steamodded (>=1.0.0~BETA-1221a)"
+	],
 	"conflicts": []
 }
