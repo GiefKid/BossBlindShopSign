@@ -10,10 +10,10 @@ Other versions of this UI mod already exist, but I wanted to create a simple one
 - **Skip-tag icons** flanking the boss sprite, showing any Small/Big blind tags you've skipped, dimmed once that blind has been passed.
 - **Draggable icons (v1.4)**: the boss sprite and skip-tag icons on the sign can be picked up and dragged around like the in-round boss chip, and glide back into place when released.
 - **Required Chip Score shows in-shop**: the round-info panel shows the *next* blind's chip requirement (color-matched to blind type) instead of the last round's score, relabeled "Req. / Score".
-- **Improved Deck Preview**: When the upcoming boss debuffs cards, the deck view marks the affected cards with the "X" Debuff ahead of time — cards played this ante for The Pillar, matching-suit cards for The Club/Goad/Window/Head, and face cards for The Plant.
+- **Improved Deck Preview**: When the upcoming boss debuffs cards, the Deck View marks the affected cards with the "X" Debuff — cards played this ante for The Pillar, matching-suit cards for The Club/Goad/Window/Head, and face cards for The Plant. In v1.5, this is now a togglable setting, and support for Verdant Leaf was added.
 
 ## v1.5 Features
-- When player owns Chicot, "Boss Disabled" now appears instead of "Upcoming", as well as a grey border instead of red.
+- When player owns Chicot, "Boss Disabled" now appears instead of "Upcoming", as well as a grey border instead of red. Debuffs in shop also do not appear.
 - New Settings button
 - Setting 1: **Show Upcoming Debuffed Cards**: Already in the mod (Improved Deck Preview), just wasn't able to be toggled on/off. Default On.
 - Setting 2: **Show Debuff Reminder On Deck**: New "X" color-adjustable debuff icon on the deck when in the shop, which appears when a boss blind debuffs at least one card. Default On.
@@ -25,6 +25,7 @@ Other versions of this UI mod already exist, but I wanted to create a simple one
 - Req. Score now properly stays visible in all parts of the shop
 - Better (but not perfect) modded boss description support
 - Verdant Leaf now shows properly in the Deck Preview, and triggers the X Debuff Reminder
+- New Steamodded (1.0.0~BETA-1221a or newer) requirement to prevent crashes
 
 ## Installation
 
